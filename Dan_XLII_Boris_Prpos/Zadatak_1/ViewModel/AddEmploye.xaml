@@ -1,0 +1,113 @@
+﻿<Window x:Class="Zadatak_1.ViewModel.AddEmploye"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:Zadatak_1.ViewModel"
+        mc:Ignorable="d"
+        Title="AddEmploye"
+        Height="450"
+        Width="800">
+    <Grid>
+        <TextBox HorizontalAlignment="Left"
+                 Height="23"
+                 Margin="130,32,0,0"
+                 TextWrapping="Wrap"
+                PreviewTextInput="LettersValidationTextBox"
+                 VerticalAlignment="Top"
+                 Width="120"
+                 Text="{Binding Employe.UserName,UpdateSourceTrigger=PropertyChanged}"/>
+        <TextBox HorizontalAlignment="Left"
+                 Height="23"
+                 Margin="130,77,0,0"
+                 TextWrapping="Wrap"                 
+                 VerticalAlignment="Top"
+                 PreviewTextInput="LettersValidationTextBox"
+                 Width="120"
+                 Text="{Binding Employe.Surname, UpdateSourceTrigger=PropertyChanged}"/>
+        <TextBox HorizontalAlignment="Left"
+                 Height="23"
+                 Margin="130,127,0,0"
+                 TextWrapping="Wrap"
+                 PreviewTextInput="NumbersOnlyTextBox"
+                 MaxLength="13"
+                 Text="{Binding Employe.JMBG,UpdateSourceTrigger=PropertyChanged}"
+                 VerticalAlignment="Top"
+                 Width="120" />
+        <TextBox HorizontalAlignment="Left"
+                 Height="23"
+                 Margin="130,175,0,0"
+                 TextWrapping="Wrap"
+                 PreviewTextInput="NumbersOnlyTextBox"
+                 Text="{Binding Employe.IdNumber, UpdateSourceTrigger=PropertyChanged}"
+                 VerticalAlignment="Top"
+                 Width="120" />
+        <TextBox HorizontalAlignment="Left"
+                 Height="23"
+                 Margin="130,220,0,0"
+                 TextWrapping="Wrap"
+                 MaxLength="10"
+                 Text="{Binding Employe.Number,UpdateSourceTrigger=PropertyChanged}"
+                 VerticalAlignment="Top"
+                 PreviewTextInput="NumbersOnlyTextBox"
+             
+                 Width="120" />
+        <TextBox HorizontalAlignment="Left"
+                 Height="23"
+                 Margin="130,275,0,0"
+                 TextWrapping="Wrap"
+                 Text="{Binding Sector.SectorName,UpdateSourceTrigger=PropertyChanged}"
+                 VerticalAlignment="Top"
+                 Width="120" />
+        <ComboBox HorizontalAlignment="Left"
+                  VerticalAlignment="Top"
+                  Width="120"
+                  Margin="455,33,0,0"
+                  DisplayMemberPath="Gender"
+                  IsEditable="True"
+                  ItemsSource="{Binding GenderList,UpdateSourceTrigger=PropertyChanged}"
+                  SelectedItem="{Binding Gender,UpdateSourceTrigger=PropertyChanged}">
+            
+        </ComboBox>
+        <ComboBox HorizontalAlignment="Left"
+                  VerticalAlignment="Top"
+                  Width="120"
+                  Margin="455,95,0,0"
+                  DisplayMemberPath="Place"
+                  IsEditable="True"
+                  ItemsSource="{Binding LocationList,UpdateSourceTrigger=PropertyChanged}"
+                  SelectedItem="{Binding Location,UpdateSourceTrigger=PropertyChanged}">
+            
+        </ComboBox>
+        <Label Content="Name"
+               Margin="25,32,667,342" />
+        <Label Content="Surname"
+               Margin="25,77,667,296" />
+        <Label Content="JMBG"
+               Margin="25,123,694,249" />
+        <Label Content="ID number"
+               Margin="25,175,694,204" />
+        <Label Content="Phone Number"
+               Margin="25,220,667,153" />
+        <Label Content="Sector"
+               Margin="25,271,694,99" />
+        <Label Content="Gender"
+               Margin="347,37,372,333" />
+        <Label Content="Location"
+               Margin="347,91,372,269" />
+        <Button Content="Save"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Top"
+                Width="75"
+                Margin="347,219,0,0"
+                Command="{Binding Save,UpdateSourceTrigger=PropertyChanged}"
+                />
+        <Button Content="Close"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Top"
+                Width="75"
+                Margin="480,220,0,0"
+                RenderTransformOrigin="1.373,0.55"
+                Command="{Binding Close,UpdateSourceTrigger=PropertyChanged}"/>
+    </Grid>
+</Window>
