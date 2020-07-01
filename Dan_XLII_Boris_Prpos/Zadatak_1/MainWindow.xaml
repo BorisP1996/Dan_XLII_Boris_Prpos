@@ -64,6 +64,8 @@
                                         Binding="{Binding DateOfBirth}" />
                     <DataGridTextColumn Header="Sector"
                                         Binding="{Binding SectorName}" />
+                    <DataGridTextColumn Header="Phone Number"
+                                        Binding="{Binding Number}" />
                   
                     <DataGridTemplateColumn>
                         <DataGridTemplateColumn.CellTemplate>
@@ -74,33 +76,16 @@
                             </DataTemplate>
                         </DataGridTemplateColumn.CellTemplate>
                     </DataGridTemplateColumn>
-                    <DataGridTemplateColumn>
-                        <DataGridTemplateColumn.CellTemplate>
-                            <DataTemplate>
-                                <Button  Command="{Binding Path=DataContext.EditUser, RelativeSource= {RelativeSource FindAncestor,
-                                       AncestorType={x:Type DataGrid}},UpdateSourceTrigger=PropertyChanged}"
-                                         Content="Edit" />
-                            </DataTemplate>
-                        </DataGridTemplateColumn.CellTemplate>
-                    </DataGridTemplateColumn>
+                    
                 </DataGrid.Columns>
             </DataGrid>
         </Grid>
-        <StackPanel Grid.Column="1"
-                    Grid.Row="3"
-                    Orientation="Horizontal">
-            <Button Name="btnAddLocation"
-                    Content="Add Location"
-                    Width="80"
-                    Height="20"
-                    Command="{Binding AddNewLocation,UpdateSourceTrigger=PropertyChanged}"
-                    FontWeight="Bold" />
-        </StackPanel>
+       
         <StackPanel Grid.Column="1"
                     Grid.Row="5"
                     Orientation="Horizontal">
             <Button Name="btnAddUser"
-                    Content="Add User"
+                    Content="Add Employe"
                     Width="80"
                     Height="20"
                     Command="{Binding AddUser,UpdateSourceTrigger=PropertyChanged}"

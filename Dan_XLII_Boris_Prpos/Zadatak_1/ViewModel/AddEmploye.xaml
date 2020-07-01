@@ -13,62 +13,64 @@
                  Height="23"
                  Margin="130,32,0,0"
                  TextWrapping="Wrap"
-                 Text="TextBox"
+                
                  VerticalAlignment="Top"
-                 Width="120" />
+                 Width="120"
+                 Text="{Binding Employe.UserName,UpdateSourceTrigger=PropertyChanged}"/>
         <TextBox HorizontalAlignment="Left"
                  Height="23"
                  Margin="130,77,0,0"
-                 TextWrapping="Wrap"
-                 Text="TextBox"
+                 TextWrapping="Wrap"                 
                  VerticalAlignment="Top"
-                 Width="120" />
+                 Width="120"
+                 Text="{Binding Employe.Surname, UpdateSourceTrigger=PropertyChanged}"/>
         <TextBox HorizontalAlignment="Left"
                  Height="23"
                  Margin="130,127,0,0"
                  TextWrapping="Wrap"
-                 Text="TextBox"
+                 Text="{Binding Employe.JMBG,UpdateSourceTrigger=PropertyChanged}"
                  VerticalAlignment="Top"
                  Width="120" />
         <TextBox HorizontalAlignment="Left"
                  Height="23"
                  Margin="130,175,0,0"
                  TextWrapping="Wrap"
-                 Text="TextBox"
+                 Text="{Binding Employe.IdNumber, UpdateSourceTrigger=PropertyChanged}"
                  VerticalAlignment="Top"
                  Width="120" />
         <TextBox HorizontalAlignment="Left"
                  Height="23"
                  Margin="130,220,0,0"
                  TextWrapping="Wrap"
-                 Text="TextBox"
+                 Text="{Binding Employe.Number,UpdateSourceTrigger=PropertyChanged}"
                  VerticalAlignment="Top"
                  Width="120" />
         <TextBox HorizontalAlignment="Left"
                  Height="23"
                  Margin="130,275,0,0"
                  TextWrapping="Wrap"
-                 Text="TextBox"
-                 VerticalAlignment="Top"
-                 Width="120" />
-        <TextBox HorizontalAlignment="Left"
-                 Height="23"
-                 Margin="130,325,0,0"
-                 TextWrapping="Wrap"
-                 Text="TextBox"
+                 Text="{Binding Sector.SectorName,UpdateSourceTrigger=PropertyChanged}"
                  VerticalAlignment="Top"
                  Width="120" />
         <ComboBox HorizontalAlignment="Left"
                   VerticalAlignment="Top"
                   Width="120"
-                  Margin="455,33,0,0">
-            <ComboBox Width="120" />
+                  Margin="455,33,0,0"
+                  DisplayMemberPath="Gender"
+                  IsEditable="True"
+                  ItemsSource="{Binding GenderList,UpdateSourceTrigger=PropertyChanged}"
+                  SelectedItem="{Binding Gender,UpdateSourceTrigger=PropertyChanged}">
+            
         </ComboBox>
         <ComboBox HorizontalAlignment="Left"
                   VerticalAlignment="Top"
                   Width="120"
-                  Margin="455,95,0,0">
-            <ComboBox Width="120" />
+                  Margin="455,95,0,0"
+                  DisplayMemberPath="Place"
+                  IsEditable="True"
+                  ItemsSource="{Binding LocationList,UpdateSourceTrigger=PropertyChanged}"
+                  SelectedItem="{Binding Location,UpdateSourceTrigger=PropertyChanged}">
+            
         </ComboBox>
         <Label Content="Name"
                Margin="25,32,667,342" />
@@ -82,13 +84,8 @@
                Margin="25,220,667,153" />
         <Label Content="Sector"
                Margin="25,271,694,99" />
-        <Label Content="Label"
-               Margin="25,325,694,44" />
         <Label Content="Gender"
                Margin="347,37,372,333" />
-        <Label Content="Label"
-               HorizontalAlignment="Left"
-               VerticalAlignment="Top" />
         <Label Content="Location"
                Margin="347,91,372,269" />
         <Button Content="Save"
@@ -96,12 +93,14 @@
                 VerticalAlignment="Top"
                 Width="75"
                 Margin="347,219,0,0"
-                Click="Button_Click" />
-        <Button Content="Cancel"
+                Command="{Binding Save,UpdateSourceTrigger=PropertyChanged}"
+                />
+        <Button Content="Close"
                 HorizontalAlignment="Left"
                 VerticalAlignment="Top"
                 Width="75"
                 Margin="480,220,0,0"
-                RenderTransformOrigin="1.373,0.55" />
+                RenderTransformOrigin="1.373,0.55"
+                Command="{Binding Close,UpdateSourceTrigger=PropertyChanged}"/>
     </Grid>
 </Window>
