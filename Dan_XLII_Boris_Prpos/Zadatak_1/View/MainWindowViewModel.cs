@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -7,6 +8,7 @@ using System.Windows;
 using System.Windows.Input;
 using Zadatak_1.Command;
 using Zadatak_1.Model;
+using Zadatak_1.ViewModel;
 
 namespace Zadatak_1.View
 {
@@ -86,7 +88,7 @@ namespace Zadatak_1.View
                         //taking registration number from selected user 
                         string IdNumber = Employe.IdNumber;
                         //inserting message box that will be shown when delete button is pressed
-                        MessageBoxResult messageBoxResult = MessageBox.Show("Are you sure? ID card will also be deleted.", "Delete Confirmation", MessageBoxButton.YesNo);
+                        MessageBoxResult messageBoxResult = MessageBox.Show("Are you sure that you want to delete employe?", "Delete Confirmation", MessageBoxButton.YesNo);
                         if (messageBoxResult == MessageBoxResult.Yes)
                         {
                             //finding user and card that needs to be deleted, finding them with registration number 
@@ -124,6 +126,47 @@ namespace Zadatak_1.View
             {
                 return true;
             }
+        }
+        private ICommand addUser;
+        public ICommand AddUser
+        {
+            get
+            {
+                if (addUser == null)
+                {
+                    addUser = new RelayCommand(param => AddUserExecute(), param => CanAddUserExecute());
+
+                }
+                return addUser;
+            }
+        }
+
+        private void AddUserExecute()
+        {
+            try
+            {
+                AddEmploye addEmploye = new AddEmploye();
+                //opening new window
+                addEmploye.ShowDialog();
+                //checking for updates
+                //if ((addEmploye.DataContext as AddEmployeViewModel).IsUpdateEmploye == true)
+                //{
+                    //refresing list => including added user
+                    ListEmploye = GetAllEmployes();
+                    //sorting refreshed list
+                    main.DataGridUsers.Items.SortDescriptions.Add(new SortDescription("DateOfExpire", ListSortDirection.Ascending));
+               //}
+
+            }
+            catch (Exception ex)
+            {
+
+                MessageBox.Show(ex.ToString());
+            }
+        }
+        private bool CanAddUserExecute()
+        {
+            return true;
         }
 
     }
