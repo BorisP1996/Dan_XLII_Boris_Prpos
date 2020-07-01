@@ -20,12 +20,13 @@ namespace Zadatak_1.Model
         public string IdNumber { get; set; }
         public string JMBG { get; set; }
         public string DateOfBirth { get; set; }
-        public string Gender { get; set; }
+        public int GenderID { get; set; }
         public string Number { get; set; }
         public int SectorID { get; set; }
         public int LocationID { get; set; }
         public Nullable<int> Menager_ID { get; set; }
     
+        public virtual tblGender tblGender { get; set; }
         public virtual tblLOCATION tblLOCATION { get; set; }
         public virtual tblSector tblSector { get; set; }
     }

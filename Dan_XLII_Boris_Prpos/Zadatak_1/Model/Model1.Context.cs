@@ -13,10 +13,10 @@ namespace Zadatak_1.Model
     using System.Data.Entity;
     using System.Data.Entity.Infrastructure;
     
-    public partial class Entity42 : DbContext
+    public partial class Entity : DbContext
     {
-        public Entity42()
-            : base("name=Entity42")
+        public Entity()
+            : base("name=Entity")
         {
         }
     
@@ -26,6 +26,7 @@ namespace Zadatak_1.Model
         }
     
         public virtual DbSet<tblEmploye> tblEmployes { get; set; }
+        public virtual DbSet<tblGender> tblGenders { get; set; }
         public virtual DbSet<tblLOCATION> tblLOCATIONS { get; set; }
         public virtual DbSet<tblSector> tblSectors { get; set; }
         public virtual DbSet<vwEmploye> vwEmployes { get; set; }

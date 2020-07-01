@@ -7,6 +7,104 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <Grid>
-        
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="20" />
+            <ColumnDefinition Width="auto" />
+            <ColumnDefinition Width="6" />
+            <ColumnDefinition Width="auto" />
+            <ColumnDefinition Width="6" />
+            <ColumnDefinition Width="auto" />
+            <ColumnDefinition Width="6" />
+            <ColumnDefinition Width="auto" />
+            <ColumnDefinition Width="20" />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="20" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="6" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="6" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="6" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="6" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="6" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="6" />
+            <RowDefinition Height="auto" />
+            <RowDefinition Height="20" />
+        </Grid.RowDefinitions>
+        <Grid Grid.Column="1"
+              Grid.Row="1"
+              Height="auto"
+              Width="auto">
+            <DataGrid Name="DataGridUsers"
+                      ItemsSource="{Binding ListEmploye, UpdateSourceTrigger=PropertyChanged}"
+                      SelectedItem="{Binding Employe, UpdateSourceTrigger=PropertyChanged}"
+                      IsReadOnly="True"
+                      HeadersVisibility="Column"
+                      AutoGenerateColumns="False"
+                      HorizontalGridLinesBrush="Black"
+                      BorderBrush="Black"
+                      Foreground="Black"
+                      FontWeight="Bold">
+                <DataGrid.Columns>
+                    <DataGridTextColumn Header="Name"
+                                        Binding="{Binding UserName}" />
+                    <DataGridTextColumn Header="Surname"
+                                        Binding="{Binding Surname}" />
+                    <DataGridTextColumn Header="Location"
+                                        Binding="{Binding Place}" />
+                    <DataGridTextColumn Header="JMBG"
+                                        Binding="{Binding JMBG}" />
+                    <DataGridTextColumn Header="ID Number"
+                                        Binding="{Binding IdNumber}" />
+                    <DataGridTextColumn Header="Date of birth"
+                                        Binding="{Binding DateOfBirth}" />
+                    <DataGridTextColumn Header="Sector"
+                                        Binding="{Binding SectorName}" />
+                  
+                    <DataGridTemplateColumn>
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <Button  Command="{Binding Path=DataContext.DeleteUser, RelativeSource= {RelativeSource FindAncestor,
+                                       AncestorType={x:Type DataGrid}},UpdateSourceTrigger=PropertyChanged}"
+                                         Content="X" />
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                    <DataGridTemplateColumn>
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <Button  Command="{Binding Path=DataContext.EditUser, RelativeSource= {RelativeSource FindAncestor,
+                                       AncestorType={x:Type DataGrid}},UpdateSourceTrigger=PropertyChanged}"
+                                         Content="Edit" />
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
+                </DataGrid.Columns>
+            </DataGrid>
+        </Grid>
+        <StackPanel Grid.Column="1"
+                    Grid.Row="3"
+                    Orientation="Horizontal">
+            <Button Name="btnAddLocation"
+                    Content="Add Location"
+                    Width="80"
+                    Height="20"
+                    Command="{Binding AddNewLocation,UpdateSourceTrigger=PropertyChanged}"
+                    FontWeight="Bold" />
+        </StackPanel>
+        <StackPanel Grid.Column="1"
+                    Grid.Row="5"
+                    Orientation="Horizontal">
+            <Button Name="btnAddUser"
+                    Content="Add User"
+                    Width="80"
+                    Height="20"
+                    Command="{Binding AddUser,UpdateSourceTrigger=PropertyChanged}"
+                    FontWeight="Bold" />
+        </StackPanel>
     </Grid>
 </Window>

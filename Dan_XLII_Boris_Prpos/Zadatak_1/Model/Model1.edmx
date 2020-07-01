@@ -15,11 +15,18 @@
           <Property Name="IdNumber" Type="nvarchar" MaxLength="20" Nullable="false" />
           <Property Name="JMBG" Type="varchar" MaxLength="13" Nullable="false" />
           <Property Name="DateOfBirth" Type="varchar" MaxLength="20" Nullable="false" />
-          <Property Name="Gender" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="GenderID" Type="int" Nullable="false" />
           <Property Name="Number" Type="nvarchar" MaxLength="15" Nullable="false" />
           <Property Name="SectorID" Type="int" Nullable="false" />
           <Property Name="LocationID" Type="int" Nullable="false" />
           <Property Name="Menager_ID" Type="int" />
+        </EntityType>
+        <EntityType Name="tblGenders">
+          <Key>
+            <PropertyRef Name="GenderID" />
+          </Key>
+          <Property Name="GenderID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Gender" Type="nvarchar" MaxLength="10" Nullable="false" />
         </EntityType>
         <EntityType Name="tblLOCATIONS">
           <Key>
@@ -48,7 +55,7 @@ warning 6002: The table/view 'Zadatak_42.dbo.vwEmploye' does not have a primary 
             <PropertyRef Name="IdNumber" />
             <PropertyRef Name="JMBG" />
             <PropertyRef Name="DateOfBirth" />
-            <PropertyRef Name="Gender" />
+            <PropertyRef Name="GenderID" />
             <PropertyRef Name="Number" />
             <PropertyRef Name="SectorID" />
             <PropertyRef Name="LocationID" />
@@ -61,13 +68,25 @@ warning 6002: The table/view 'Zadatak_42.dbo.vwEmploye' does not have a primary 
           <Property Name="IdNumber" Type="nvarchar" MaxLength="20" Nullable="false" />
           <Property Name="JMBG" Type="varchar" MaxLength="13" Nullable="false" />
           <Property Name="DateOfBirth" Type="varchar" MaxLength="20" Nullable="false" />
-          <Property Name="Gender" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="GenderID" Type="int" Nullable="false" />
           <Property Name="Number" Type="nvarchar" MaxLength="15" Nullable="false" />
           <Property Name="SectorID" Type="int" Nullable="false" />
           <Property Name="LocationID" Type="int" Nullable="false" />
           <Property Name="Menager_ID" Type="int" />
         </EntityType>
-        <Association Name="FK__tblEmploy__Locat__75A278F5">
+        <Association Name="FK__tblEmploy__Gende__0B91BA14">
+          <End Role="tblGenders" Type="Self.tblGenders" Multiplicity="1" />
+          <End Role="tblEmployes" Type="Self.tblEmployes" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblGenders">
+              <PropertyRef Name="GenderID" />
+            </Principal>
+            <Dependent Role="tblEmployes">
+              <PropertyRef Name="GenderID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tblEmploy__Locat__0A9D95DB">
           <End Role="tblLOCATIONS" Type="Self.tblLOCATIONS" Multiplicity="1" />
           <End Role="tblEmployes" Type="Self.tblEmployes" Multiplicity="*" />
           <ReferentialConstraint>
@@ -79,7 +98,7 @@ warning 6002: The table/view 'Zadatak_42.dbo.vwEmploye' does not have a primary 
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__tblEmploy__Secto__76969D2E">
+        <Association Name="FK__tblEmploy__Secto__0C85DE4D">
           <End Role="tblSectors" Type="Self.tblSectors" Multiplicity="1" />
           <End Role="tblEmployes" Type="Self.tblEmployes" Multiplicity="*" />
           <ReferentialConstraint>
@@ -93,6 +112,7 @@ warning 6002: The table/view 'Zadatak_42.dbo.vwEmploye' does not have a primary 
         </Association>
         <EntityContainer Name="Zadatak_42ModelStoreContainer">
           <EntitySet Name="tblEmployes" EntityType="Self.tblEmployes" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tblGenders" EntityType="Self.tblGenders" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tblLOCATIONS" EntityType="Self.tblLOCATIONS" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="tblSectors" EntityType="Self.tblSectors" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="vwEmploye" EntityType="Self.vwEmploye" store:Type="Views" store:Schema="dbo">
@@ -105,18 +125,22 @@ warning 6002: The table/view 'Zadatak_42.dbo.vwEmploye' does not have a primary 
     [vwEmploye].[IdNumber] AS [IdNumber], 
     [vwEmploye].[JMBG] AS [JMBG], 
     [vwEmploye].[DateOfBirth] AS [DateOfBirth], 
-    [vwEmploye].[Gender] AS [Gender], 
+    [vwEmploye].[GenderID] AS [GenderID], 
     [vwEmploye].[Number] AS [Number], 
     [vwEmploye].[SectorID] AS [SectorID], 
     [vwEmploye].[LocationID] AS [LocationID], 
     [vwEmploye].[Menager_ID] AS [Menager_ID]
     FROM [dbo].[vwEmploye] AS [vwEmploye]</DefiningQuery>
           </EntitySet>
-          <AssociationSet Name="FK__tblEmploy__Locat__75A278F5" Association="Self.FK__tblEmploy__Locat__75A278F5">
+          <AssociationSet Name="FK__tblEmploy__Gende__0B91BA14" Association="Self.FK__tblEmploy__Gende__0B91BA14">
+            <End Role="tblGenders" EntitySet="tblGenders" />
+            <End Role="tblEmployes" EntitySet="tblEmployes" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tblEmploy__Locat__0A9D95DB" Association="Self.FK__tblEmploy__Locat__0A9D95DB">
             <End Role="tblLOCATIONS" EntitySet="tblLOCATIONS" />
             <End Role="tblEmployes" EntitySet="tblEmployes" />
           </AssociationSet>
-          <AssociationSet Name="FK__tblEmploy__Secto__76969D2E" Association="Self.FK__tblEmploy__Secto__76969D2E">
+          <AssociationSet Name="FK__tblEmploy__Secto__0C85DE4D" Association="Self.FK__tblEmploy__Secto__0C85DE4D">
             <End Role="tblSectors" EntitySet="tblSectors" />
             <End Role="tblEmployes" EntitySet="tblEmployes" />
           </AssociationSet>
@@ -136,13 +160,22 @@ warning 6002: The table/view 'Zadatak_42.dbo.vwEmploye' does not have a primary 
           <Property Name="IdNumber" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="JMBG" Type="String" MaxLength="13" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="DateOfBirth" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="Gender" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="GenderID" Type="Int32" Nullable="false" />
           <Property Name="Number" Type="String" MaxLength="15" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="SectorID" Type="Int32" Nullable="false" />
           <Property Name="LocationID" Type="Int32" Nullable="false" />
           <Property Name="Menager_ID" Type="Int32" />
-          <NavigationProperty Name="tblLOCATION" Relationship="Self.FK__tblEmploy__Locat__75A278F5" FromRole="tblEmployes" ToRole="tblLOCATIONS" />
-          <NavigationProperty Name="tblSector" Relationship="Self.FK__tblEmploy__Secto__76969D2E" FromRole="tblEmployes" ToRole="tblSectors" />
+          <NavigationProperty Name="tblGender" Relationship="Self.FK__tblEmploy__Gende__0B91BA14" FromRole="tblEmployes" ToRole="tblGenders" />
+          <NavigationProperty Name="tblLOCATION" Relationship="Self.FK__tblEmploy__Locat__0A9D95DB" FromRole="tblEmployes" ToRole="tblLOCATIONS" />
+          <NavigationProperty Name="tblSector" Relationship="Self.FK__tblEmploy__Secto__0C85DE4D" FromRole="tblEmployes" ToRole="tblSectors" />
+        </EntityType>
+        <EntityType Name="tblGender">
+          <Key>
+            <PropertyRef Name="GenderID" />
+          </Key>
+          <Property Name="GenderID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Gender" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="tblEmployes" Relationship="Self.FK__tblEmploy__Gende__0B91BA14" FromRole="tblGenders" ToRole="tblEmployes" />
         </EntityType>
         <EntityType Name="tblLOCATION">
           <Key>
@@ -152,7 +185,7 @@ warning 6002: The table/view 'Zadatak_42.dbo.vwEmploye' does not have a primary 
           <Property Name="Adress" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="Place" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
           <Property Name="States" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
-          <NavigationProperty Name="tblEmployes" Relationship="Self.FK__tblEmploy__Locat__75A278F5" FromRole="tblLOCATIONS" ToRole="tblEmployes" />
+          <NavigationProperty Name="tblEmployes" Relationship="Self.FK__tblEmploy__Locat__0A9D95DB" FromRole="tblLOCATIONS" ToRole="tblEmployes" />
         </EntityType>
         <EntityType Name="tblSector">
           <Key>
@@ -160,7 +193,7 @@ warning 6002: The table/view 'Zadatak_42.dbo.vwEmploye' does not have a primary 
           </Key>
           <Property Name="SectorID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="SectorName" Type="String" MaxLength="30" FixedLength="false" Unicode="true" Nullable="false" />
-          <NavigationProperty Name="tblEmployes" Relationship="Self.FK__tblEmploy__Secto__76969D2E" FromRole="tblSectors" ToRole="tblEmployes" />
+          <NavigationProperty Name="tblEmployes" Relationship="Self.FK__tblEmploy__Secto__0C85DE4D" FromRole="tblSectors" ToRole="tblEmployes" />
         </EntityType>
         <EntityType Name="vwEmploye">
           <Key>
@@ -171,7 +204,7 @@ warning 6002: The table/view 'Zadatak_42.dbo.vwEmploye' does not have a primary 
             <PropertyRef Name="IdNumber" />
             <PropertyRef Name="JMBG" />
             <PropertyRef Name="DateOfBirth" />
-            <PropertyRef Name="Gender" />
+            <PropertyRef Name="GenderID" />
             <PropertyRef Name="Number" />
             <PropertyRef Name="SectorID" />
             <PropertyRef Name="LocationID" />
@@ -184,13 +217,25 @@ warning 6002: The table/view 'Zadatak_42.dbo.vwEmploye' does not have a primary 
           <Property Name="IdNumber" Type="String" MaxLength="20" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="JMBG" Type="String" MaxLength="13" FixedLength="false" Unicode="false" Nullable="false" />
           <Property Name="DateOfBirth" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
-          <Property Name="Gender" Type="String" MaxLength="10" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="GenderID" Type="Int32" Nullable="false" />
           <Property Name="Number" Type="String" MaxLength="15" FixedLength="false" Unicode="true" Nullable="false" />
           <Property Name="SectorID" Type="Int32" Nullable="false" />
           <Property Name="LocationID" Type="Int32" Nullable="false" />
           <Property Name="Menager_ID" Type="Int32" />
         </EntityType>
-        <Association Name="FK__tblEmploy__Locat__75A278F5">
+        <Association Name="FK__tblEmploy__Gende__0B91BA14">
+          <End Role="tblGenders" Type="Self.tblGender" Multiplicity="1" />
+          <End Role="tblEmployes" Type="Self.tblEmploye" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tblGenders">
+              <PropertyRef Name="GenderID" />
+            </Principal>
+            <Dependent Role="tblEmployes">
+              <PropertyRef Name="GenderID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__tblEmploy__Locat__0A9D95DB">
           <End Role="tblLOCATIONS" Type="Self.tblLOCATION" Multiplicity="1" />
           <End Role="tblEmployes" Type="Self.tblEmploye" Multiplicity="*" />
           <ReferentialConstraint>
@@ -202,7 +247,7 @@ warning 6002: The table/view 'Zadatak_42.dbo.vwEmploye' does not have a primary 
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <Association Name="FK__tblEmploy__Secto__76969D2E">
+        <Association Name="FK__tblEmploy__Secto__0C85DE4D">
           <End Role="tblSectors" Type="Self.tblSector" Multiplicity="1" />
           <End Role="tblEmployes" Type="Self.tblEmploye" Multiplicity="*" />
           <ReferentialConstraint>
@@ -214,16 +259,21 @@ warning 6002: The table/view 'Zadatak_42.dbo.vwEmploye' does not have a primary 
             </Dependent>
           </ReferentialConstraint>
         </Association>
-        <EntityContainer Name="Entity42" annotation:LazyLoadingEnabled="true">
+        <EntityContainer Name="Entity" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="tblEmployes" EntityType="Self.tblEmploye" />
+          <EntitySet Name="tblGenders" EntityType="Self.tblGender" />
           <EntitySet Name="tblLOCATIONS" EntityType="Self.tblLOCATION" />
           <EntitySet Name="tblSectors" EntityType="Self.tblSector" />
           <EntitySet Name="vwEmployes" EntityType="Self.vwEmploye" />
-          <AssociationSet Name="FK__tblEmploy__Locat__75A278F5" Association="Self.FK__tblEmploy__Locat__75A278F5">
+          <AssociationSet Name="FK__tblEmploy__Gende__0B91BA14" Association="Self.FK__tblEmploy__Gende__0B91BA14">
+            <End Role="tblGenders" EntitySet="tblGenders" />
+            <End Role="tblEmployes" EntitySet="tblEmployes" />
+          </AssociationSet>
+          <AssociationSet Name="FK__tblEmploy__Locat__0A9D95DB" Association="Self.FK__tblEmploy__Locat__0A9D95DB">
             <End Role="tblLOCATIONS" EntitySet="tblLOCATIONS" />
             <End Role="tblEmployes" EntitySet="tblEmployes" />
           </AssociationSet>
-          <AssociationSet Name="FK__tblEmploy__Secto__76969D2E" Association="Self.FK__tblEmploy__Secto__76969D2E">
+          <AssociationSet Name="FK__tblEmploy__Secto__0C85DE4D" Association="Self.FK__tblEmploy__Secto__0C85DE4D">
             <End Role="tblSectors" EntitySet="tblSectors" />
             <End Role="tblEmployes" EntitySet="tblEmployes" />
           </AssociationSet>
@@ -233,7 +283,7 @@ warning 6002: The table/view 'Zadatak_42.dbo.vwEmploye' does not have a primary 
     <!-- C-S mapping content -->
     <edmx:Mappings>
       <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
-        <EntityContainerMapping StorageEntityContainer="Zadatak_42ModelStoreContainer" CdmEntityContainer="Entity42">
+        <EntityContainerMapping StorageEntityContainer="Zadatak_42ModelStoreContainer" CdmEntityContainer="Entity">
           <EntitySetMapping Name="tblEmployes">
             <EntityTypeMapping TypeName="Zadatak_42Model.tblEmploye">
               <MappingFragment StoreEntitySet="tblEmployes">
@@ -243,11 +293,19 @@ warning 6002: The table/view 'Zadatak_42.dbo.vwEmploye' does not have a primary 
                 <ScalarProperty Name="IdNumber" ColumnName="IdNumber" />
                 <ScalarProperty Name="JMBG" ColumnName="JMBG" />
                 <ScalarProperty Name="DateOfBirth" ColumnName="DateOfBirth" />
-                <ScalarProperty Name="Gender" ColumnName="Gender" />
+                <ScalarProperty Name="GenderID" ColumnName="GenderID" />
                 <ScalarProperty Name="Number" ColumnName="Number" />
                 <ScalarProperty Name="SectorID" ColumnName="SectorID" />
                 <ScalarProperty Name="LocationID" ColumnName="LocationID" />
                 <ScalarProperty Name="Menager_ID" ColumnName="Menager_ID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tblGenders">
+            <EntityTypeMapping TypeName="Zadatak_42Model.tblGender">
+              <MappingFragment StoreEntitySet="tblGenders">
+                <ScalarProperty Name="GenderID" ColumnName="GenderID" />
+                <ScalarProperty Name="Gender" ColumnName="Gender" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -280,7 +338,7 @@ warning 6002: The table/view 'Zadatak_42.dbo.vwEmploye' does not have a primary 
                 <ScalarProperty Name="IdNumber" ColumnName="IdNumber" />
                 <ScalarProperty Name="JMBG" ColumnName="JMBG" />
                 <ScalarProperty Name="DateOfBirth" ColumnName="DateOfBirth" />
-                <ScalarProperty Name="Gender" ColumnName="Gender" />
+                <ScalarProperty Name="GenderID" ColumnName="GenderID" />
                 <ScalarProperty Name="Number" ColumnName="Number" />
                 <ScalarProperty Name="SectorID" ColumnName="SectorID" />
                 <ScalarProperty Name="LocationID" ColumnName="LocationID" />

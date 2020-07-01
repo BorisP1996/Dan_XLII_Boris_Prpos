@@ -22,7 +22,7 @@ namespace Zadatak_1.Model
         public string IdNumber { get; set; }
         public string JMBG { get; set; }
         public string DateOfBirth { get; set; }
-        public string Gender { get; set; }
+        public int GenderID { get; set; }
         public string Number { get; set; }
         public int SectorID { get; set; }
         public int LocationID { get; set; }
