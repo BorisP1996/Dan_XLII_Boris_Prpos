@@ -22,8 +22,8 @@ namespace Zadatak_1.View
             addEmploye = addEmployeOpen;
             LocationList = GetLocations();
             GenderList = GetGenders();
-            //Location = new tblLOCATION();
-           // Gender = new tblGender();
+            Location = new tblLOCATION();
+            Gender = new tblGender();
             Employe = new tblEmploye();
             Sector = new tblSector();
           
@@ -133,14 +133,16 @@ namespace Zadatak_1.View
         }
         private void SaveExecute()
         {
+            try
+            {      
             tblEmploye newEmploye = new tblEmploye();
             newEmploye.UserName = Employe.UserName;
             newEmploye.Surname = Employe.Surname;
             newEmploye.IdNumber = Employe.IdNumber;
             newEmploye.Number = Employe.Number;
-            newEmploye.DateOfBirth = "1996-25-10";
             newEmploye.JMBG = Employe.JMBG;
-            //for sector
+            newEmploye.DateOfBirth = CalculateBirth(Employe.JMBG);
+                //for sector
             string newSector = Sector.SectorName;
             tblSector newSectorObject = new tblSector();
             newSectorObject.SectorName = newSector;
@@ -188,15 +190,31 @@ namespace Zadatak_1.View
             {
                 Location.LocationID = 5;
             }
+                
             newEmploye.LocationID = Location.LocationID;
             context.tblEmployes.Add(newEmploye);
             context.SaveChanges();
             addEmploye.Close();
+            }
+            catch (Exception ex)
+            {
+
+                MessageBox.Show("Error occured. Make sure that you have provided valid JMBG. Please fix the problems and try again."+ex.ToString());
+
+            }
 
         }
         private bool CanSaveExecute()
         {
-            return true;
+            
+            if (String.IsNullOrEmpty(Employe.UserName) || String.IsNullOrEmpty(Employe.Surname) || string.IsNullOrEmpty(Employe.JMBG) || String.IsNullOrEmpty(Employe.Number) || String.IsNullOrEmpty(Sector.SectorName) || String.IsNullOrEmpty(Location.Place)||String.IsNullOrEmpty(Gender.Gender) || String.IsNullOrEmpty(Employe.IdNumber) || Employe.Number.Length<9 || Employe.JMBG.Length<13)
+            {
+                return false;
+            }
+            else
+            {
+                return true;
+            }
         }
         private ICommand close;
         public ICommand Close
@@ -234,6 +252,26 @@ namespace Zadatak_1.View
             List<tblGender> listOfGenders = new List<tblGender>();
             listOfGenders = context.tblGenders.ToList();
             return listOfGenders;
+        }
+        public string CalculateBirth(string jmbg)
+        {
+            string needed = jmbg.Substring(0, 7);
+            int milenium =Convert.ToInt32( needed.Substring(5, 1));
+            int god = 0;
+            if (milenium==0)
+            {
+                god = 2;
+            }
+            else
+            {
+                god = 1;
+            }
+            string year = god + needed.Substring(4, 3);
+            string month = needed.Substring(2, 2);
+            string day = needed.Substring(0, 2);
+
+            string complete = year + "-" + month + "-" + day;
+            return complete;
         }
         public List<tblLOCATION> GetLocations()
         {

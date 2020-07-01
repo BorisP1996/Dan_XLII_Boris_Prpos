@@ -13,7 +13,7 @@
                  Height="23"
                  Margin="130,32,0,0"
                  TextWrapping="Wrap"
-                
+                PreviewTextInput="LettersValidationTextBox"
                  VerticalAlignment="Top"
                  Width="120"
                  Text="{Binding Employe.UserName,UpdateSourceTrigger=PropertyChanged}"/>
@@ -22,12 +22,15 @@
                  Margin="130,77,0,0"
                  TextWrapping="Wrap"                 
                  VerticalAlignment="Top"
+                 PreviewTextInput="LettersValidationTextBox"
                  Width="120"
                  Text="{Binding Employe.Surname, UpdateSourceTrigger=PropertyChanged}"/>
         <TextBox HorizontalAlignment="Left"
                  Height="23"
                  Margin="130,127,0,0"
                  TextWrapping="Wrap"
+                 PreviewTextInput="NumbersOnlyTextBox"
+                 MaxLength="13"
                  Text="{Binding Employe.JMBG,UpdateSourceTrigger=PropertyChanged}"
                  VerticalAlignment="Top"
                  Width="120" />
@@ -35,6 +38,7 @@
                  Height="23"
                  Margin="130,175,0,0"
                  TextWrapping="Wrap"
+                 PreviewTextInput="NumbersOnlyTextBox"
                  Text="{Binding Employe.IdNumber, UpdateSourceTrigger=PropertyChanged}"
                  VerticalAlignment="Top"
                  Width="120" />
@@ -42,8 +46,11 @@
                  Height="23"
                  Margin="130,220,0,0"
                  TextWrapping="Wrap"
+                 MaxLength="10"
                  Text="{Binding Employe.Number,UpdateSourceTrigger=PropertyChanged}"
                  VerticalAlignment="Top"
+                 PreviewTextInput="NumbersOnlyTextBox"
+             
                  Width="120" />
         <TextBox HorizontalAlignment="Left"
                  Height="23"
